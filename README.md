@@ -4,21 +4,21 @@
 
 ### Objectif général :
 
-Créer une API REST qui permet de simuler des architectures réseau dynamiques en orchestrant des containers Docker via Kubernetes. Cette API doit permettre de :
+Créer une API REST qui permet de configurer des architectures réseau en orchestrant des containers Docker via Kubernetes. Cette API doit permettre de :
 
-* Créer, modifier, lister et supprimer des topologies réseau (POST/GET).
-* Déployer des simulations réseau dans un cluster Kubernetes.
-* Exécuter des commandes sur des nœuds (pods) simulant du matériel réseau.
+* Créer, modifier, lister et supprimer des configurations réseau (POST/GET).
+* Déployer des configurations réseau dans une architecture reseau virtuelle via un cluster Kubernetes.
+* Exécuter des commandes sur des nœuds (pods) simulant des configurations réseau.
 * Récupérer les logs et résultats d’exécution des commandes.
-* Gérer un catalogue de topologies prédéfinies et personnalisables.
-* Utiliser une base de données pour sauvegarder, charger et versionner des configurations.
+* Gérer un catalogue des configurations réseaux prédéfinies et personnalisables.
+* Utiliser une base de données pour sauvegarder, charger et versionner les configurations reseaux.
 
 ### Livrables :
 
-* Spécification fonctionnelle (PDF)
+* Spécification fonctionnelle de l'API, de l'architecture réseau simulée (PDF)
 * Schéma de topologie réseau simulée
-* Organisation GitHub + Trello
-* Structure du dépôt (Back/API – Chart Helm – Infra)
+* Organisation GitHub 
+* Structure du dépôt (Back/API – Chart Helm)
 
 ---
 
@@ -26,15 +26,11 @@ Créer une API REST qui permet de simuler des architectures réseau dynamiques e
 
 ### Conteneurisation :
 
-* Docker avec images réseau spécialisées : FRRouting, Open vSwitch, VyOS (si containerisable).
+* Docker avec images réseau spécialisées : FRRouting, Cisco XRd, Juniper vMX.
 
 ### Orchestration :
 
-* Kubernetes (EKS, Minikube, Kind) avec Helm pour déployer des topologies réseau comme des graphes de pods/services.
-
-### Connectivité réseau :
-
-* CNI Calico ou Cilium pour gérer le routage entre les pods et les politiques réseau.
+* Kubernetes avec clabernetes pour déployer des topologies réseau.
 
 ### Exposition de l’API :
 
@@ -53,7 +49,7 @@ Créer une API REST qui permet de simuler des architectures réseau dynamiques e
 
 * MongoDB ou PostgreSQL pour :
 
-  * Stocker les topologies sauvegardées
+  * Stocker les configurations sauvegardées
   * Gérer les configurations personnalisées (JSON/YAML)
   * Historique des commandes exécutées
   * Logs de simulation
@@ -61,13 +57,12 @@ Créer une API REST qui permet de simuler des architectures réseau dynamiques e
 ### Logs & commandes :
 
 * Exécution de commandes sur les nœuds via l’API
-* Résultats et logs persistés (BDD ou S3)
+* Résultats et logs persistés (BDD)
 * Filtrage, affichage, historique par utilisateur
 
 ### Sécurité d’accès :
 
-* Authentification JWT
-* RBAC (admin / user / readonly)
+* Authentification par token 
 
 ---
 
@@ -75,20 +70,17 @@ Créer une API REST qui permet de simuler des architectures réseau dynamiques e
 
 ### Pipeline DevOps :
 
-* **Outils** : GitHub Actions, Jenkins ou CircleCI
+* **Outils** : GitHub Actions, Jenkins 
 * **Étapes** :
 
   * Lint / Tests (Pytest, Shellcheck)
-  * Build d’images Docker (ex: frr\:latest)
+  * Build d’images Docker 
   * Push sur registry
   * Déploiement via kubectl ou Helm upgrade
-  * Blue/Green deployment (namespace isolés)
 
 ### Indicateurs suivis :
 
 * Fréquence des déploiements
-* Durée de build
-* Rollback rate
 * Logs de tests automatiques
 
 ---
@@ -98,8 +90,8 @@ Créer une API REST qui permet de simuler des architectures réseau dynamiques e
 ### Outils de monitoring :
 
 * Prometheus + Grafana pour les métriques réseau et Kubernetes
-* Loki ou CloudWatch pour les logs
-* AlertManager (ou Datadog) pour les alertes configurables
+* Kibana pour les logs
+* Datadog pour les alertes configurables
 
 ### Métriques surveillées :
 
@@ -134,63 +126,11 @@ Créer une API REST qui permet de simuler des architectures réseau dynamiques e
 
 ### 🔁 Routeurs / Protocoles de routage
 
-| Image Docker  | Description                          | Notes                       |
-| ------------- | ------------------------------------ | --------------------------- |
-| frrouting/frr | Suite complète OSPF, BGP, RIP, IS-IS | Stable, bien maintenue      |
-| cznic/bird    | Routeur léger BGP et OSPF            | Très utilisé dans les IXP   |
-| osrg/gobgp    | Routeur BGP en Go                    | Léger, facile à script      |
-| Quagga        | Ancien projet remplacé par FRR       | Obsolète mais parfois utile |
-
-### 🔀 Switching & SDN
-
-| Image Docker            | Description             | Notes                          |
-| ----------------------- | ----------------------- | ------------------------------ |
-| socketplane/openvswitch | Switch virtuel OpenFlow | Nécessite des scripts de setup |
-| lagopus/lagopus         | Switch SDN user space   | Moins connu                    |
-| Pantheon OVS (Custom)   | Version optimisée OVS   | Build manuel parfois requis    |
-
-### 🔐 Firewall / IDS / VPN
-
-| Image Docker               | Description         | Notes                       |
-| -------------------------- | ------------------- | --------------------------- |
-| strongswan/strongswan      | VPN IPsec IKEv2     | Stable                      |
-| linuxserver/wireguard      | VPN rapide, moderne | Très facile à containeriser |
-| Alpine + iptables/nftables | Firewall simple     | Pour simuler pfSense/IPFire |
-
-### 🌐 Load Balancing / Proxy / DNS / DHCP
-
-| Image Docker                    | Description            | Notes                       |
-| ------------------------------- | ---------------------- | --------------------------- |
-| haproxytech/haproxy-alpine      | Load balancer TCP/HTTP | Excellente intégration K8s  |
-| nginx                           | Reverse proxy HTTP/S   | Peut simuler du web traffic |
-| andyshinn/dnsmasq               | DNS/DHCP simplifié     | Idéal pour test locaux      |
-| internetsystemsconsortium/bind9 | DNS complet            | Configuration avancée       |
-
-### 🧪 Outils de test réseau
-
-| Image Docker             | Description                  | Notes                        |
-| ------------------------ | ---------------------------- | ---------------------------- |
-| networkstatic/iperf3     | Test de bande passante       | Classique                    |
-| praqma/network-multitool | ping, curl, netcat, ip, etc. | Utile pour tests automatisés |
-| leodido/mtr              | Traceroute + stats           | Alternative à traceroute     |
-| tcpdump                  | Sniffer réseau               | Intégrable en conteneur      |
-
-### 🧱 OS réseau containerisables (niveau avancé)
-
-| Projet              | Containerisable ?   | Notes                              |
-| ------------------- | ------------------- | ---------------------------------- |
-| VyOS                | Oui (custom build)  | À partir de QEMU ou image modifiée |
-| MikroTik / RouterOS | Non officiellement  | Préférer VM                        |
-| Juniper vSRX/vMX    | Non (VM uniquement) | Licence requise                    |
-| Cumulus Linux       | VM uniquement       | Pour cas SDN pro                   |
+| Image Docker  | Description                          
+| ------------- | ------------------------------------ | 
+| frrouting/frr | Suite complète OSPF, BGP, RIP, IS-IS | 
+| Cisco XRd     | Routeur virtuel Cisco XRd            | 
+| Juniper vMX   | Routeur virtuel Juniter              | 
 
 ---
 
-### 🧠 Recommandations NetLab API :
-
-* Utiliser **FRR** pour le routage dynamique
-* **Open vSwitch** ou **Lagopus** pour switching/SDN
-* **WireGuard** pour VPN
-* **iptables/nftables** (dans Alpine) pour firewall léger
-* Scripts ou containers de tests (iperf3, multitool, mtr, tcpdump)
-* Créer un **Helm chart par rôle** : routeur, switch, client test, etc.
