@@ -36,7 +36,7 @@ Créer une API REST qui permet de configurer des architectures réseau en orches
 ### Exposition de l’API :
 
 * Ingress NGINX avec TLS (Let's Encrypt ou ACM)
-* API Gateway (option AWS)
+* FASTAPI (option AWS)
 
 ### Haute disponibilité & Sauvegardes :
 
@@ -113,7 +113,6 @@ Créer une API REST qui permet de configurer des architectures réseau en orches
 
 ### Modularité et réutilisabilité :
 
-* Un dossier Helm chart par topologie ou environnement (dev, test, prod)
 * Templates YAML adaptables (variables pour les nœuds, interfaces, commandes)
 
 ### Sécurisation :
