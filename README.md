@@ -31,6 +31,7 @@ Créer une API REST qui permet de configurer des architectures réseau en orches
 ### Orchestration :
 
 * Kubernetes avec clabernetes pour déployer des topologies réseau.
+* Kubernetes avec helm pour déployer l'API et les différents services associé
 
 ### Exposition de l’API :
 
