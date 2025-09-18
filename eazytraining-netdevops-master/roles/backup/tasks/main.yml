@@ -1,0 +1,23 @@
+---
+# tasks file for backup
+- name: recupération des facts
+  ios_facts:
+    gather_subset: all
+
+- name: récupération de la date courante
+  local_action: command date +%Y-%b-%d
+  register: date
+
+- name: récupération du temps courant
+  local_action: command date +%H:%M
+  register: time
+
+- name: mise en place de la sauvegarde de la running config
+  cisco.ios.ios_config:
+    backup: yes
+    backup_options:
+      filename: " {{ ansible_net_hostname }}_{{ansible_host}}.cfg"
+      dir_path: /home/backup_switchs/{{ date.stdout }}_{{ time.stdout }}
+
+- name: sauvegarde réussie
+  debug: msg="Toutes les sauvegardes sont faites le {{ date.stdout }} à {{ time.stdout }}."

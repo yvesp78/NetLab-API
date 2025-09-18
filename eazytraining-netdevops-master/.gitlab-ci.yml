@@ -1,0 +1,19 @@
+---
+stages:
+  - test
+  - deploiement
+
+test-molecule:
+  stage: test
+  script:
+    - rm -Rf /home/gitlab-runner/.cache
+    - ansible-galaxy collection install cisco.ios
+    - cd roles/config-ip && molecule test
+
+deploiement:
+  stage: test
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  script:
+    - ansible-playbook -i hosts -u admin  -e ansible_network_os=ios playbook.yml
+

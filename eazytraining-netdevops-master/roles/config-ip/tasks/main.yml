@@ -1,0 +1,42 @@
+- name: recupération des ansibles facts
+  debug:
+    msg:
+      - "{{ ansible_facts.net_hostname }}"
+
+- name: configure interface sw-d1
+  ios_config:
+    lines:
+      - description interface fa0/1 dist-01
+      - ip address 172.31.1.1 255.255.255.0
+    after:
+      - no shutdown
+    diff_against: startup
+    save_when: modified
+    parents: interface FastEthernet0/1
+  when: ansible_facts.net_hostname == "sw-d1"
+
+
+- name: configure interface sw-d2
+  cisco.ios.ios_config:
+    lines:
+      - description interface fa0/1 dist-02
+      - ip address 172.31.1.2 255.255.255.0
+    after:
+      - no shutdown
+    diff_against: startup
+    save_when: modified
+    parents: interface FastEthernet0/1
+  when: ansible_facts.net_hostname == "sw-d2"
+
+- name: configuration de l'interface du swith  sw-1 pour test
+  cisco.ios.ios_config:
+    lines:
+      - description interface fa0/1 dist-02
+      - ip address 172.31.1.253 255.255.255.0
+    after:
+      - no shutdown
+    diff_against: startup
+    save_when: modified
+    parents: interface FastEthernet0/1
+  when: ansible_facts.net_hostname == "sw1"
+

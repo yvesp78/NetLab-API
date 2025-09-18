@@ -1,0 +1,108 @@
+R1#show running-config 
+Building configuration...
+
+Current configuration : 1322 bytes
+!
+! Last configuration change at 01:46:53 UTC Wed Dec 25 2019
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no platform punt-keepalive disable-kernel-core
+platform console virtual
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$Wdbj$WZba0iAneOuCGOYbRWObe.
+enable password cisco
+!
+aaa new-model
+!
+!
+!         
+!
+!
+!
+!
+aaa session-id common
+!
+!
+!
+!
+!
+!
+!
+
+
+ip domain name test.com
+!
+!
+!
+!
+!
+!
+!
+!         
+!
+!
+subscriber templating
+multilink bundle-name authenticated
+!
+!
+license udi pid CSR1000V sn XXXXXXXXXXXXXX
+!
+username admin privilege 15 password 0 cisco
+username mihara password 0 cisco
+!
+redundancy
+ mode none
+!
+!
+!
+ip ssh version 2
+ip ssh pubkey-chain
+  username admin
+   key-hash ssh-rsa XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   key-hash ssh-rsa XXXXXXXXXXXXXXXXXXXXXXXXXX mihara@kibitaki.mihalabo.com
+no ip ssh server authenticate user keyboard
+!
+!
+!
+!
+interface GigabitEthernet1
+ ip address 192.168.122.101 255.255.255.0
+ negotiation auto
+!
+!
+virtual-service csr_mgmt
+ activate
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+access-list 1 permit 192.168.122.0 0.0.0.255
+!
+snmp-server community public RO
+!
+!
+!         
+!
+control-plane
+!
+!
+line con 0
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ password cisco
+ transport input ssh
+!
+!
+end

@@ -1,0 +1,16 @@
+[distribution:vars]
+ansible_connexion=network_cli
+ansible_network_os=ios
+ansible_user=cisco
+ansible_password=cisco
+ansible_become=yes
+ansible_method_become=enable
+ansible_become_password=cisco
+ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
+ansible_python_interpreter=/usr/local/bin/python3.8
+ansible_net_auth_pass=cisco
+ansible_net_authorize=yes
+[distribution]
+sw-d1 ansible_host=192.168.1.211
+sw-d2 ansible_host=192.168.1.212
+sw1 ansible_host=192.168.1.211

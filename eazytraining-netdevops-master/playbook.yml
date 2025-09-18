@@ -1,0 +1,16 @@
+---
+- name: configuration ip des interfaces fa0/1 des switchs et backups des configs
+  connection: network_cli
+  gather_facts: true
+  become: yes
+  become_method: enable
+  hosts: distribution
+  vars:
+    cli:
+      username: cisco
+      password: cisco
+      timeout: 100
+      auth_pass: cisco
+  roles:
+    - config-ip
+    - backup

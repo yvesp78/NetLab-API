@@ -1,0 +1,194 @@
+[mihara@kibitaki cisco-setup]$ molecule test
+--> Validating schema /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/molecule.yml.
+Validation completed successfully.
+--> Test matrix
+    
+└── default
+    ├── lint
+    ├── dependency
+    ├── cleanup
+    ├── destroy
+    ├── syntax
+    ├── create
+    ├── prepare
+    ├── converge
+    ├── idempotence
+    ├── side_effect
+    ├── verify
+    ├── cleanup
+    └── destroy
+    
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/group_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/group_vars
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/host_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/host_vars
+--> Scenario: 'default'
+--> Action: 'lint'
+--> Executing Yamllint on files found in /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/...
+Lint completed successfully.
+--> Executing Flake8 on files found in /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/tests/...
+Lint completed successfully.
+--> Executing Ansible Lint on /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/playbook.yml...
+Lint completed successfully.
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/group_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/group_vars
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/host_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/host_vars
+--> Scenario: 'default'
+--> Action: 'dependency'
+Skipping, missing the requirements file.
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/group_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/group_vars
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/host_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/host_vars
+--> Scenario: 'default'
+--> Action: 'cleanup'
+Skipping, cleanup playbook not configured.
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/group_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/group_vars
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/host_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/host_vars
+--> Scenario: 'default'
+--> Action: 'destroy'
+    
+    PLAY [Destroy] *****************************************************************
+    
+    PLAY RECAP *********************************************************************
+    
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/group_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/group_vars
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/host_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/host_vars
+--> Scenario: 'default'
+--> Action: 'syntax'
+    
+    playbook: /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/playbook.yml
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/group_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/group_vars
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/host_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/host_vars
+--> Scenario: 'default'
+--> Action: 'create'
+    
+    PLAY [Create] ******************************************************************
+    
+    PLAY RECAP *********************************************************************
+    
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/group_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/group_vars
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/host_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/host_vars
+--> Scenario: 'default'
+--> Action: 'prepare'
+Skipping, prepare playbook not configured.
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/group_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/group_vars
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/host_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/host_vars
+--> Scenario: 'default'
+--> Action: 'converge'
+    
+    PLAY [Converge] ****************************************************************
+    
+    TASK [Gathering Facts] *********************************************************
+[WARNING]: Ignoring timeout(10) for ios_facts
+
+    ok: [R1]
+    
+    TASK [cisco-setup : hello] *****************************************************
+    ok: [R1] => {
+        "msg": "Hello!"
+    }
+    
+    TASK [cisco-setup : GATHER FACTS] **********************************************
+    ok: [R1]
+[WARNING]: default value for `gather_subset` will be changed to `min` from
+`!config` v2.11 onwards
+
+    
+    TASK [cisco-setup : print facts] ***********************************************
+    ok: [R1] => {
+        "msg": {
+            "ansible_facts": {
+                "ansible_net_all_ipv4_addresses": [
+                    "192.168.122.101"
+                ],
+                "ansible_net_all_ipv6_addresses": [],
+                "ansible_net_api": "cliconf",
+                "ansible_net_config": "show running-config\r\nshow running-config\r\n      ^\r\n% Invalid input detected at '^' marker.\r\n\r\nR1>",
+                "ansible_net_filesystems": [],
+                "ansible_net_filesystems_info": {},
+                "ansible_net_gather_network_resources": [],
+                "ansible_net_gather_subset": [
+                    "config",
+                    "interfaces",
+                    "hardware",
+                    "default"
+                ],
+                "ansible_net_hostname": "R1",
+                "ansible_net_image": "bootflash:packages.conf",
+                "ansible_net_interfaces": {
+                    "GigabitEthernet1": {
+                        "bandwidth": 1000000,
+                        "description": null,
+                        "duplex": "Auto",
+                        "ipv4": [
+                            {
+                                "address": "192.168.122.101",
+                                "subnet": "24"
+                            }
+                        ],
+                        "lineprotocol": "up",
+                        "macaddress": "5254.0034.5cf6",
+                        "mediatype": "RJ45",
+                        "mtu": 1500,
+                        "operstatus": "up",
+                        "type": "CSR vNIC"
+                    }
+                },
+                "ansible_net_iostype": "IOS-XE",
+                "ansible_net_memfree_mb": 1922582.140625,
+                "ansible_net_memtotal_mb": 2179537.734375,
+                "ansible_net_model": "CSR1000V",
+                "ansible_net_neighbors": {},
+                "ansible_net_python_version": "3.6.8",
+                "ansible_net_serialnum": "9R4I8Q2FOI7",
+                "ansible_net_system": "ios",
+                "ansible_net_version": "03.11.00.S",
+                "ansible_network_resources": {}
+            },
+            "changed": false,
+            "failed": false,
+            "warnings": [
+                "default value for `gather_subset` will be changed to `min` from `!config` v2.11 onwards"
+            ]
+        }
+    }
+    
+    PLAY RECAP *********************************************************************
+    R1                         : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+    
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/group_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/group_vars
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/host_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/host_vars
+--> Scenario: 'default'
+--> Action: 'idempotence'
+Idempotence completed successfully.
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/group_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/group_vars
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/host_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/host_vars
+--> Scenario: 'default'
+--> Action: 'side_effect'
+Skipping, side effect playbook not configured.
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/group_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/group_vars
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/host_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/host_vars
+--> Scenario: 'default'
+--> Action: 'verify'
+--> Executing Testinfra tests found in /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/tests/...
+    ============================= test session starts ==============================
+    platform linux -- Python 3.6.8, pytest-5.3.2, py-1.8.0, pluggy-0.13.1
+    rootdir: /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default
+    plugins: testinfra-3.3.0
+collected 1 item                                                               
+    
+    tests/test_default.py .                                                  [100%]
+    
+    ============================== 1 passed in 8.37s ===============================
+Verifier completed successfully.
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/group_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/group_vars
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/host_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/host_vars
+--> Scenario: 'default'
+--> Action: 'cleanup'
+Skipping, cleanup playbook not configured.
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/group_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/group_vars
+--> Inventory /home/mihara/ansible/ansible-molecule-for-existing-routers/roles/cisco-setup/molecule/default/../../../../inventories/staging/host_vars/ linked to /home/mihara/.cache/molecule/cisco-setup/default/inventory/host_vars
+--> Scenario: 'default'
+--> Action: 'destroy'
+    
+    PLAY [Destroy] *****************************************************************
+    
+    PLAY RECAP *********************************************************************
+    
+--> Pruning extra files from scenario ephemeral directory

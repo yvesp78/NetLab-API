@@ -1,0 +1,22 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: delegated
+lint: |
+  yamllint
+  ansible-lint
+platforms:
+  - name: sw1
+    groups:
+      - test
+provisioner:
+  name: ansible
+  log: true
+  inventory:
+    links:
+      group_vars:
+        ../../../../inventories/staging/group_vars/
+      host_vars:
+        ../../../../inventories/staging/host_vars/
+

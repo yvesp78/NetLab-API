@@ -1,0 +1,10 @@
+---
+
+- name: Converge
+  connection: network_cli
+  gather_facts: true
+  become: true
+  become_method: enable
+  hosts: all
+  roles:
+    - role: cisco-setup

@@ -1,0 +1,24 @@
+---
+# tasks file for vlan
+- name: recupération des ansibles facts
+  debug:
+    msg:
+      - "{{ ansible_facts.net_hostname }}"
+
+- name: configuration vlan pour le switch sw-a1
+  cisco.ios.ios_l2_interfaces:
+    config:
+    - name: FastEthernet0/2
+      mode: access
+      access:
+        vlan: 10
+  when: ansible_facts.net_hostname == "sw-a1"
+- name: configuration vlan pour le switch sw-a2
+  cisco.ios.ios_l2_interfaces:
+    config:
+    - name: FastEthernet0/2
+      mode: access
+      access:
+        vlan: 20
+    state: merged
+  when: ansible_facts.net_hostname == "sw-a2"

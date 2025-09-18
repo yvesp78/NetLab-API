@@ -1,0 +1,12 @@
+[test]
+sw1
+
+[cisco:vars]
+ansible_connexion=network_cli
+ansible_network_os=ios
+ansible_user=cisco
+ansible_password=cisco
+ansible_become=yes
+ansible_method_become=enable
+ansible_become_password=cisco
+ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
